@@ -2,6 +2,8 @@
 
 from selenium import webdriver
 from fixture.session import SessionHelper
+from action.project_action import ProjectAction
+from project.project import Project
 
 
 class Application:
@@ -14,9 +16,10 @@ class Application:
             self.wd = webdriver.Ie()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        self.wd.implicitly_wait(1)
+        self.wd.implicitly_wait(3)
         self.session = SessionHelper(self)
-        #self.group = GroupHelper(self)
+        self.action = ProjectAction(self)
+        self.project = Project(self)
         #self.kontact = KontactHelper(self)
         self.base_url = base_url
 
